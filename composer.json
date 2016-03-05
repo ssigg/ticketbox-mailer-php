@@ -1,0 +1,10 @@
+{
+    "require": {
+        "ktamas77/firebase-php":  "dev-master",
+        "slim/slim": "2.*",
+        "latte/latte": "2.4.*@dev",
+        "bacon/bacon-qr-code": "dev-master",
+        "nette/mail": "2.4.*@dev",
+        "matthiasmullie/minify": "dev-master"
+    }
+}

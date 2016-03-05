@@ -1,0 +1,11 @@
+Dear {$order->firstname} {$order->lastname}
+
+Reservation text.
+
+Reserved Seats
+==============
+{foreach $seats as $seat}
+{$seat['name']}: {$seat['price']} CHF {if $seat['is_reduced']}(reduced){/if}
+{/foreach}
+
+Total: {$total} CHF
