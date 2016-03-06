@@ -1,0 +1,9 @@
+{
+    "fburl": "https://<app-name>.firebaseio.com",
+    "fbtoken": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "addresses": {
+        "sender": "Sender <sender@example.com>",
+        "reply": "Reply To <reply@example.com>",
+        "watcher": "Watch <watch@example.com>"
+    }
+}

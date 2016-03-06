@@ -27,9 +27,9 @@ class Mailer {
  
         $message = new \Nette\Mail\Message;
         $message
-            ->setFrom('Ticket System <system@example.com>')
+            ->setFrom($this->_config['addresses']['sender'])
             ->setSubject($subject)
-            ->addReplyTo($this->_adminEmail)
+            ->addReplyTo($this->_config['addresses']['reply'])
             ->addTo($order->email)
             ->setBody($body);
         $this->_mailer->send($message);
@@ -46,10 +46,10 @@ class Mailer {
 
         $message = new \Nette\Mail\Message;
         $message
-            ->setFrom('Ticket System <system@example.com>')
+            ->setFrom($this->_config['addresses']['sender'])
             ->setSubject($subject)
-            ->addReplyTo('Reply to <admin@example.com>')
-            ->addTo('Admin <admin@example.com>')
+            ->addReplyTo($this->_config['addresses']['reply'])
+            ->addTo($this->_config['addresses']['watcher'])
             ->setBody($body);
         $this->_mailer->send($message);
     }
