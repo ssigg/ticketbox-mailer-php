@@ -10,18 +10,49 @@ class Firebase {
     }
     
     public function GetOrder($orderId) {
-        $order = $this->_firebase->get('/orders/' + $orderId);
+        $order = $this->ConvertResponse($this->_firebase->get('/orders/' . $orderId));
         return $order;
     }
     
     public function GetReservations($orderId) {
-        $query = '/reservations?orderBy=orderId&startAt=' . $orderId . '&endAt=' . $orderId;
-        $reservations = $this->_firebase->get($query);
-        return $reservations;
+        $reservations = $this->ConvertResponse($this->_firebase->get('/reservations'));
+        $reservationsForOrder = [];
+        foreach ($reservations as $reservation) {
+            if ($reservation['orderId'] == $orderId) {
+                $reservationsForOrder[] = $reservation;
+            }
+        }
+        return $reservationsForOrder;
     }
     
     public function GetEvent($eventId) {
-        $event = $this->_firebase->get('/events/' . $eventId);
-        return $events;
+        $event = $this->ConvertResponse($this->_firebase->get('/events/' . $eventId));
+        return $event;
+    }
+    
+    public function GetSeat($seatId) {
+        $seat = $this->ConvertResponse($this->_firebase->get('/seats/' . $seatId));
+        return $seat;
+    }
+    
+    public function GetEventBlock($eventId, $blockId) {
+        $eventBlocks = $this->ConvertResponse($this->_firebase->get('/events/' . $eventId . '/blocks'));
+        $eventBlocksForEventAndBlock = [];
+        foreach ($eventBlocks as $eventBlock) {
+            if ($eventBlock['blockId'] == $blockId) {
+                return $eventBlock;
+            }
+        }
+        return null;
+    }
+    
+    public function GetCategory($categoryId) {
+        $category = $this->ConvertResponse($this->_firebase->get('/categories/' . $categoryId));
+        return $category;
+    }
+    
+    private function ConvertResponse($responseAsJson) {
+        $response = json_decode($responseAsJson, true);
+        return $response;
     }
 }

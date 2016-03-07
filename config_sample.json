@@ -5,5 +5,11 @@
         "sender": "Sender <sender@example.com>",
         "reply": "Reply To <reply@example.com>",
         "watcher": "Watch <watch@example.com>"
+    },
+    "subjects": {
+        "order": {
+            "notification": "Notification subject",
+            "confirmation": "Confirmation subject"
+        }
     }
 }

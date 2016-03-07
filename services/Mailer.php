@@ -15,11 +15,11 @@ class Mailer {
         $this->_qrCodeCreator = new QRCodeCreator;
     }
 
-    public function SendOrderConfirmation($order, $seats, $totalPrice, $subject) {
+    public function SendOrderConfirmation($order, $reservations, $totalPrice) {
         $params = [
             'order' => $order,
-            'seats' => $seats,
-            'total' => $totalPrice
+            'reservations' => $reservations,
+            'totalPrice' => $totalPrice
         ];
 
         $template = __DIR__ . '/mails/OrderConfirmation.txt';
@@ -28,18 +28,18 @@ class Mailer {
         $message = new \Nette\Mail\Message;
         $message
             ->setFrom($this->_config['addresses']['sender'])
-            ->setSubject($subject)
+            ->setSubject($this->_config['subjects']['order']['confirmation'])
             ->addReplyTo($this->_config['addresses']['reply'])
-            ->addTo($order->email)
+            ->addTo($order['email'])
             ->setBody($body);
         $this->_mailer->send($message);
     }
 
-    public function SendOrderNotification($order, $seats, $totalPrice, $subject) {
+    public function SendOrderNotification($order, $reservations, $totalPrice) {
         $params = [
             'order' => $order,
-            'seats' => $seats,
-            'total' => $totalPrice
+            'reservations' => $reservations,
+            'totalPrice' => $totalPrice
         ];
 
         $body = $this->_latte->renderToString(__DIR__ . '/mails/OrderNotification.txt', $params);
@@ -47,7 +47,7 @@ class Mailer {
         $message = new \Nette\Mail\Message;
         $message
             ->setFrom($this->_config['addresses']['sender'])
-            ->setSubject($subject)
+            ->setSubject($this->_config['subjects']['order']['notification'])
             ->addReplyTo($this->_config['addresses']['reply'])
             ->addTo($this->_config['addresses']['watcher'])
             ->setBody($body);
