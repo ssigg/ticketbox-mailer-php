@@ -5,6 +5,7 @@
         "latte/latte": "2.4.*@dev",
         "bacon/bacon-qr-code": "dev-master",
         "nette/mail": "2.4.*@dev",
-        "matthiasmullie/minify": "dev-master"
+        "matthiasmullie/minify": "dev-master",
+        "katzgrau/klogger": "dev-master"
     }
 }
