@@ -6,7 +6,7 @@ require 'services/Firebase.php';
 require 'services/Mailer.php';
 require 'services/QRCodeCreator.php';
 
-$config = json_decode(file_get_contents("config.json"), true);
+$config = json_decode(file_get_contents("config/config.json"), true);
 $logger = new \Katzgrau\KLogger\Logger(__DIR__.'/logs');
 
 // Create slim application
@@ -46,6 +46,7 @@ $app->post('/order', function() use ($app, $config, $logger) {
                 $totalPrice += $price;
                 
                 $orderForLog['seats'][] = [
+                    'event' => $event['name'],
                     'name' => $seat['name'],
                     'price' => $price,
                     'reduction' => false

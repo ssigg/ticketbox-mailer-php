@@ -2,5 +2,5 @@
 node_modules
 vendor
 composer.lock
-config.json
+config/config.json
 logs/log_*
