@@ -5,7 +5,7 @@ Reservation text.
 Reserved Seats
 ==============
 {foreach $reservations as $reservation}
-{$reservation['event']['name']} - {$reservation['seat']['name']}: {$reservation['price']} CHF {if $reservation['is_reduced']}(reduced){/if}
+{$reservation['event']['name']} - {$reservation['seat']['name']}: {$reservation['price']} CHF {if $reservation['isReduced']}(reduced){/if}
 {/foreach}
 
 Total: {$totalPrice} CHF

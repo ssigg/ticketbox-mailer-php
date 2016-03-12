@@ -38,18 +38,17 @@ $app->post('/order', function() use ($app, $config, $logger) {
                 $seat = $firebase->GetSeat($reservation['seatId']);
                 $eventBlock = $firebase->GetEventBlock($reservation['eventId'], $seat['blockId']);
                 $category = $firebase->GetCategory($eventBlock['categoryId']);
-                $price = $category['price'];
+                $price = $reservation['isReduced'] ? $category['reducedPrice'] : $category['price'];
                 $reservations[$key]['event'] = $event;
                 $reservations[$key]['seat'] = $seat;
                 $reservations[$key]['price'] = $price;
-                $reservations[$key]['is_reduced'] = false;
                 $totalPrice += $price;
                 
                 $orderForLog['seats'][] = [
                     'event' => $event['name'],
                     'name' => $seat['name'],
                     'price' => $price,
-                    'reduction' => false
+                    'reduction' => $reservation['isReduced']
                 ];
             }
             
